@@ -16,3 +16,9 @@ curl测试命令: curl -i -r 0-99 http://localhost:8080/file/download2/b8ce8f5b9
 * Content-Type: 值为:application/oct-stream
 * Content-Disposition: 值为: attachment;filename=文件名
 * Accept-Ranges: 值为 bytes 代表以字节为单位
+
+#### 使用postman测试文件上传
+> 选择form-data格式 鼠标移动到key中选择file格式
+
+![](photo/postman-file.png)
+
