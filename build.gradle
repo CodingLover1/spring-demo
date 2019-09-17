@@ -1,0 +1,52 @@
+
+group 'com.ws'
+version '1.0-SNAPSHOT'
+apply plugin: 'java'
+
+
+
+buildscript {
+    ext {
+        //定义一个变量，统一规定springboot的版本
+        //springBootVersion = '1.5.9.RELEASE'
+        springBootVersion='2.0.9.RELEASE'
+    }
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {//用来打包
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+// 所有模块/项目的通用配置
+allprojects {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        jcenter()
+        mavenCentral()
+    }
+
+}
+
+// 子模块/项目的统一配置
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    //spring boot 插件
+    apply plugin: 'org.springframework.boot'
+    //A Gradle plugin that provides Maven-like dependency management functionality
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencies {
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Finchley.SR2'
+        }
+    }
+}
